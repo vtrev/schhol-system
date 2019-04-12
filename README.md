@@ -1,1 +1,1 @@
-# schhol-system
+# school-system

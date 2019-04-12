@@ -28,6 +28,9 @@ public class Student {
     }
 
     public void updateTokenCount(int numberOfTokens){
+        if(this.tokenCount + numberOfTokens >= 0){
+            this.tokenCount += numberOfTokens;
+        }
         this.tokenCount += numberOfTokens;
     }
 

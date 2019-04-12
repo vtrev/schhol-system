@@ -7,6 +7,7 @@ public class Teacher {
     private final String lastName;
     private final String emailAddress;
     private final  ArrayList<Subjects> teacherSubjects;
+    private int tokenCount = 0;
 
     public Teacher(String firstName, String lastName, String emailAddress,ArrayList<Subjects> subjects) {
         this.firstName = firstName;
@@ -15,6 +16,13 @@ public class Teacher {
         this.teacherSubjects = subjects;
     }
 
+
+    //setters
+    public void updateTokenCount(int numberOfTokens){
+        if(this.tokenCount + numberOfTokens >= 0){
+            this.tokenCount   += numberOfTokens;
+        }
+    }
 
 
     //getters
@@ -32,5 +40,9 @@ public class Teacher {
 
     public ArrayList<Subjects> getTeacherSubjects() {
         return teacherSubjects;
+    }
+
+    public int getTokenCount(){
+        return tokenCount;
     }
 }

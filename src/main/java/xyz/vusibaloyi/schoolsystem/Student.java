@@ -23,12 +23,14 @@ public class Student {
         this.registeredSubjects.add(subject);
     }
 
-    public void attendLesson(Lesson lesson){
+    public String attendLesson(Lesson lesson){
         if(this.registeredSubjects.size() >= 3){
-        this.inLesson = true;
+            this.inLesson = true;
         this.attendedLessons.add(lesson);
+        return "Attending lesson";
         }
 
+        return "Student has  less than 3 subjects registered";
     }
 
     public void exitLesson(Lesson lesson){

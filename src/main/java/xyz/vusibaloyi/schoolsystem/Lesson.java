@@ -48,7 +48,7 @@ public class Lesson {
             }
         return "Not enough students";
         }
-        return "Teacher not qualified";
+        return "Teacher not qualified to teach this lesson";
     }
 
     public void endLesson(){

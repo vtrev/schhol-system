@@ -42,10 +42,8 @@ class LessonTest {
             accountingLesson.acceptStudent(s);
         }
         //assertion
-        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified");
+        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
     }
-
-
 
     @Test
     void acceptRegisteredStudent() {
@@ -79,13 +77,43 @@ class LessonTest {
 
     }
 
-
-
     @Test
-    void startLesson() {
+    void startLessonIfRequirementsMet() {
+        ArrayList<Subjects> subjectList = new ArrayList<Subjects>();
+        subjectList.add(Subjects.ECONOMICS);
+        Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
+        Lesson economicsLesson = new Lesson(Subjects.ECONOMICS, "15:00");
+        //create 5 students and register them for at least subjects
+        for (int i = 0; i < 5; i++) {
+            Student s = new Student("studentFirstname" + i, "studentLastname" + i, "student+" + i + "@mail.com");
+            s.registerSubject(Subjects.ACCOUNTING);
+            s.registerSubject(Subjects.ECONOMICS);
+            s.registerSubject(Subjects.ENGLISH);
+            economicsLesson.acceptStudent(s);
+        }
+        economicsLesson.acceptTeacher(teacher);
+        //assertion
+        assertEquals(economicsLesson.startLesson(),"Lesson started");
+
     }
 
     @Test
-    void endLesson() {
+    void doNotStartLessonIfRequirementsNotMet() {
+        ArrayList<Subjects> subjectList = new ArrayList<Subjects>();
+        subjectList.add(Subjects.COMPUTER_SCIENCE);
+        Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
+        Lesson economicsLesson = new Lesson(Subjects.ECONOMICS, "15:00");
+        //create 5 students and register them for at least subjects
+        for (int i = 0; i < 5; i++) {
+            Student s = new Student("studentFirstname" + i, "studentLastname" + i, "student+" + i + "@mail.com");
+            s.registerSubject(Subjects.ACCOUNTING);
+            s.registerSubject(Subjects.ECONOMICS);
+            s.registerSubject(Subjects.ENGLISH);
+            economicsLesson.acceptStudent(s);
+        }
+        economicsLesson.acceptTeacher(teacher);
+        //assertion
+        assertEquals(economicsLesson.startLesson(),"Teacher not qualified to teach this lesson");
+
     }
 }

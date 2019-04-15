@@ -63,7 +63,7 @@ class TeacherTest {
             accountingLesson.acceptStudent(s);
         }
         //assertion
-        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified");
+        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
     }
 
 
@@ -73,29 +73,10 @@ class TeacherTest {
         subjectList.add(Subjects.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
         //token = 0 initially
-
         teacher.updateTokenCount(15);
         assertEquals(teacher.getTokenCount(), 15);
         teacher.updateTokenCount(-5);
         assertEquals(teacher.getTokenCount(), 10);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //    Lesson tests
-
-
-
 
 }

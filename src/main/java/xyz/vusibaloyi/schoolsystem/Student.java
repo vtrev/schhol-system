@@ -7,24 +7,33 @@ public class Student {
     private final String lastName;
     private  final String emailAddress;
     private final ArrayList<Subjects> registeredSubjects;
-    private final ArrayList<Lessons> attendedLessons;
+    private final ArrayList<Lesson> attendedLessons;
     private int tokenCount = 0;
+    private boolean inLesson = false;
 
     public Student(String firstName, String lastName, String emailAddress){
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.registeredSubjects = new ArrayList<Subjects>();
-        this.attendedLessons = new ArrayList<Lessons>();
+        this.attendedLessons = new ArrayList<Lesson>();
 
     }
-    //setters
     public void registerSubject(Subjects subject){
         this.registeredSubjects.add(subject);
     }
 
-    public void attendLesson(Lessons lesson){
+    public void attendLesson(Lesson lesson){
+        if(this.registeredSubjects.size() >= 3){
+        this.inLesson = true;
         this.attendedLessons.add(lesson);
+        }
+
+    }
+
+    public void exitLesson(Lesson lesson){
+        this.updateTokenCount(3);
+        this.inLesson = false;
     }
 
     public void updateTokenCount(int numberOfTokens){
@@ -47,8 +56,11 @@ public class Student {
         return emailAddress;
     }
 
-    public int getRegisteredSubjectsCount() {
-        return registeredSubjects.size();
+    public ArrayList<Subjects> getRegisteredSubjects() {
+        return registeredSubjects;
+    }
+    public int getRegisteredSubjectCount(){
+        return this.registeredSubjects.size();
     }
 
     public int getAttendedLessonsCount() {

@@ -16,6 +16,14 @@ public class Teacher {
         this.teacherSubjects = subjects;
     }
 
+    public String teachLesson(Lesson lesson){
+        if(lesson.startLesson().equals("Lesson started")){
+            this.updateTokenCount(5);
+            return "Lesson started";
+        }
+        return lesson.startLesson();
+    }
+
 
     //setters
     public void updateTokenCount(int numberOfTokens){
@@ -23,7 +31,6 @@ public class Teacher {
             this.tokenCount   += numberOfTokens;
         }
     }
-
 
     //getters
     public String getFirstName() {

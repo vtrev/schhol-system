@@ -6,22 +6,24 @@ import java.util.List;
 public class Lesson {
 //    todo : try to take in a Localtime Object instead of string
 
-    private  Subjects subject;
+    private Subject subject;
     private  Teacher teacher;
+    private String lessonTime;
     private List<Student>  studentsInLesson = new ArrayList<Student>();
-    private boolean lessonState = false;
+    private boolean lessonInProgress = false;
 
-    public Lesson(Subjects subject,String time){
+    public Lesson(Subject subject, String time){
         this.subject = subject;
-            this.teacher = teacher;
-//            this.lessonState = true;
+        this.lessonTime = time;
+//            this.teacher = teacher;
+//            this.lessonInProgress = true;
     }
 
 
     public String acceptTeacher(Teacher teacher){
         if(teacher.getTeacherSubjects().contains(this.subject)){
             this.teacher = teacher;
-            this.lessonState = true;
+            this.lessonInProgress = true;
             return "Teacher accepted";
         }
         return "Teacher rejected,unqualified teacher";
@@ -39,7 +41,7 @@ public class Lesson {
     }
 
     public String startLesson(){
-        if(this.lessonState){
+        if(this.lessonInProgress){
         if(this.studentsInLesson.size() >= 5){
                 for(Student s:this.studentsInLesson){
                     s.attendLesson(this);
@@ -53,7 +55,7 @@ public class Lesson {
 
     public void endLesson(){
         for(Student s:this.studentsInLesson){
-
+            s.exitLesson();
         }
     }
 }

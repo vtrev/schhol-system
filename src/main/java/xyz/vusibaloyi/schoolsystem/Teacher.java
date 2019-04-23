@@ -6,10 +6,10 @@ public class Teacher {
     private final String firstName;
     private final String lastName;
     private final String emailAddress;
-    private final  ArrayList<Subjects> teacherSubjects;
+    private final  ArrayList<Subject> teacherSubjects;
     private int tokenCount = 0;
 
-    public Teacher(String firstName, String lastName, String emailAddress,ArrayList<Subjects> subjects) {
+    public Teacher(String firstName, String lastName, String emailAddress,ArrayList<Subject> subjects) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -45,7 +45,7 @@ public class Teacher {
         return emailAddress;
     }
 
-    public ArrayList<Subjects> getTeacherSubjects() {
+    public ArrayList<Subject> getTeacherSubjects() {
         return teacherSubjects;
     }
 

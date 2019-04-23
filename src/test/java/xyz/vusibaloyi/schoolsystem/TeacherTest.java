@@ -12,9 +12,9 @@ class TeacherTest {
     @Test
     void shouldCreateTeacher() {
 //        initialize
-        ArrayList<Subjects> subjectList = new ArrayList<Subjects>();
-        subjectList.add(Subjects.ACCOUNTING);
-        subjectList.add(Subjects.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>();
+        subjectList.add(Subject.ACCOUNTING);
+        subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
 
         //test if getter methods return correct info
@@ -29,17 +29,17 @@ class TeacherTest {
     @Test
     void qualifiedTeacherShouldBeAbleToTeach() {
         // initialize
-        ArrayList<Subjects> subjectList = new ArrayList<Subjects>();
-        subjectList.add(Subjects.ACCOUNTING);
-        subjectList.add(Subjects.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>();
+        subjectList.add(Subject.ACCOUNTING);
+        subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
-        Lesson accountingLesson = new Lesson(Subjects.ACCOUNTING, "10:00");
+        Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "10:00");
 //        create 5 students and register them for at least subjects
         for (int i = 0; i < 5; i++) {
             Student s = new Student("studentFirstname" + i, "studentLastname" + i, "student+" + i + "@mail.com");
-            s.registerSubject(Subjects.ACCOUNTING);
-            s.registerSubject(Subjects.ECONOMICS);
-            s.registerSubject(Subjects.ENGLISH);
+            s.registerSubject(Subject.ACCOUNTING);
+            s.registerSubject(Subject.ECONOMICS);
+            s.registerSubject(Subject.ENGLISH);
             accountingLesson.acceptStudent(s);
         }
         //assertion
@@ -50,16 +50,16 @@ class TeacherTest {
     @Test
     void unqualifiedTeacherShouldNotBeAbleToTeach() {
 
-        ArrayList<Subjects> subjectList = new ArrayList<Subjects>();
-        subjectList.add(Subjects.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>();
+        subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
-        Lesson accountingLesson = new Lesson(Subjects.ACCOUNTING, "12:00");
+        Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "12:00");
 //        create 5 students and register them for at least subjects
         for (int i = 0; i < 5; i++) {
             Student s = new Student("studentFirstname" + i, "studentLastname" + i, "student+" + i + "@mail.com");
-            s.registerSubject(Subjects.ACCOUNTING);
-            s.registerSubject(Subjects.ECONOMICS);
-            s.registerSubject(Subjects.ENGLISH);
+            s.registerSubject(Subject.ACCOUNTING);
+            s.registerSubject(Subject.ECONOMICS);
+            s.registerSubject(Subject.ENGLISH);
             accountingLesson.acceptStudent(s);
         }
         //assertion
@@ -69,8 +69,8 @@ class TeacherTest {
 
     @Test
     void updateTokenCount() {
-        ArrayList<Subjects> subjectList = new ArrayList<Subjects>();
-        subjectList.add(Subjects.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>();
+        subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
         //token = 0 initially
         teacher.updateTokenCount(15);

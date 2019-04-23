@@ -3,6 +3,7 @@ package xyz.vusibaloyi.schoolsystem;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,14 +11,13 @@ class TeacherTest {
 
 
     @Test
-    void shouldCreateTeacher() {
-//        initialize
+    void constructorTest() {
         ArrayList<Subject> subjectList = new ArrayList<Subject>();
         subjectList.add(Subject.ACCOUNTING);
         subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
+        //assertions
 
-        //test if getter methods return correct info
         assertEquals(teacher.getFirstName(), "Vusi");
         assertEquals(teacher.getLastName(), "Baloyi");
         assertEquals(teacher.getEmailAddress(), "vusi@baloyi.com");
@@ -34,15 +34,13 @@ class TeacherTest {
         subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "10:00");
-//        create 5 students and register them for at least subjects
-        for (int i = 0; i < 5; i++) {
-            Student s = new Student("studentFirstname" + i, "studentLastname" + i, "student+" + i + "@mail.com");
-            s.registerSubject(Subject.ACCOUNTING);
-            s.registerSubject(Subject.ECONOMICS);
-            s.registerSubject(Subject.ENGLISH);
-            accountingLesson.acceptStudent(s);
+        List<Student> dummyStudents = TestStudents.generateStudents();
+
+        for(Student student : dummyStudents){
+            accountingLesson.acceptStudent(student);
         }
         //assertion
+
         accountingLesson.acceptTeacher(teacher);
         assertEquals(teacher.teachLesson(accountingLesson), "Lesson started");
     }
@@ -54,18 +52,10 @@ class TeacherTest {
         subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "12:00");
-//        create 5 students and register them for at least subjects
-        for (int i = 0; i < 5; i++) {
-            Student s = new Student("studentFirstname" + i, "studentLastname" + i, "student+" + i + "@mail.com");
-            s.registerSubject(Subject.ACCOUNTING);
-            s.registerSubject(Subject.ECONOMICS);
-            s.registerSubject(Subject.ENGLISH);
-            accountingLesson.acceptStudent(s);
-        }
+
         //assertion
         assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
     }
-
 
     @Test
     void updateTokenCount() {

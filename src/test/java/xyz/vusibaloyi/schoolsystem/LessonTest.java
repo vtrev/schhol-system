@@ -57,7 +57,7 @@ class LessonTest {
     }
 
     @Test
-    void startLessonIfRequirementsMet() {
+    void startLessonIfAllRequirementsMet() {
         ArrayList<Subject> subjectList = new ArrayList<Subject>();
         subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);

@@ -6,11 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
 
-    //Testing the constructor
-    private Student student;
     @Test
     void constructorTest(){
-        student = new Student("Foo","Bar","foo@bar.ru");
+      Student  student = new Student("Foo","Bar","foo@bar.ru");
         assertEquals(student.getFirstName(),"Foo");
         assertEquals(student.getLastName(),"Bar");
         assertEquals(student.getEmailAddress(),"foo@bar.ru");
@@ -19,14 +17,14 @@ class StudentTest {
 
     @Test
     void registerSubject() {
-        student = new Student("Foo","Bar","foo@bar.ru");
+       Student student = new Student("Foo","Bar","foo@bar.ru");
         student.registerSubject(Subject.COMPUTER_SCIENCE);
         assertEquals(student.getRegisteredSubjects().contains(Subject.COMPUTER_SCIENCE),true);
     }
 
     @Test
     void attendLessonIfRegisteredFor3OrMoreSubjects() {
-        student = new Student("Foo","Bar","foo@bar.ru");
+        Student student = new Student("Foo","Bar","foo@bar.ru");
         student.registerSubject(Subject.COMPUTER_SCIENCE);
         student.registerSubject(Subject.ECONOMICS);
         student.registerSubject(Subject.ACCOUNTING);
@@ -44,16 +42,16 @@ class StudentTest {
         foo.registerSubject(Subject.ACCOUNTING);
 
         Lesson compscieLesson = new Lesson(Subject.COMPUTER_SCIENCE,"11:00");
-        Lesson economicsLesson = new Lesson(Subject.ECONOMICS,"17:00");
+        Lesson economicsLesson = new Lesson(Subject.ECONOMICS,"11:15");
         assertEquals(foo.attendLesson(compscieLesson),"Attending lesson");
         assertEquals(foo.getInLessonState(),true);
-//        next assertion should fail since student already in lesson
+//        next assertion should fail since student already in the 11:00 ComputerScience lesson lesson
         assertEquals(foo.attendLesson(economicsLesson),"Cannot attend lesson,student Foo already in lesson.");
     }
 
     @Test
     void DoNotAttendLessonIfNotRegisteredFor3OrMoreSubjects() {
-        student = new Student("Foo","Bar","foo@bar.ru");
+       Student student = new Student("Foo","Bar","foo@bar.ru");
         student.registerSubject(Subject.COMPUTER_SCIENCE);
         student.registerSubject(Subject.ECONOMICS);
 
@@ -62,7 +60,17 @@ class StudentTest {
     }
 
     @Test
+    void updateTokenCount() {
+
+        Student mike = new Student("Mike","Davids","chakaron@makaron.com");
+        int currentTokenCount = mike.getTokenCount();
+        mike.updateTokenCount(15);
+        assertEquals(currentTokenCount+15,mike.getTokenCount());
+    }
+
+    @Test
     void exitLesson() {
+
         Student joe = new Student("Joe","Doe","joe@doe.za");
         joe.registerSubject(Subject.COMPUTER_SCIENCE);
         joe.registerSubject(Subject.ECONOMICS);
@@ -75,14 +83,7 @@ class StudentTest {
         assertEquals(joe.getInLessonState(),false);
     }
 
-    @Test
-    void updateTokenCount() {
-        Student mike = new Student("Mike","Davids","chakaron@makaron.com");
 
-        int curerntTokenCount = mike.getTokenCount();
-        mike.updateTokenCount(15);
-        assertEquals(curerntTokenCount+15,mike.getTokenCount());
-    }
 
 
     @Test

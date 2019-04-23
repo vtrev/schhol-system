@@ -6,8 +6,9 @@ public class Student {
     private final String firstName;
     private final String lastName;
     private  final String emailAddress;
-    private final ArrayList<Subject> registeredSubjects;
-    private final ArrayList<Lesson> attendedLessons;
+    private  ArrayList<Subject> registeredSubjects;
+    private  ArrayList<Lesson> attendedLessons;
+    private ArrayList<LessonNote> studentNotes;
     private int tokenCount = 0;
     private boolean inLessonState = false;
 
@@ -17,7 +18,7 @@ public class Student {
         this.emailAddress = emailAddress;
         this.registeredSubjects = new ArrayList<Subject>();
         this.attendedLessons = new ArrayList<Lesson>();
-
+        this.studentNotes = new ArrayList<LessonNote>();
     }
     public void registerSubject(Subject subject){
         this.registeredSubjects.add(subject);
@@ -41,9 +42,28 @@ public class Student {
         this.inLessonState = false;
     }
 
+    public void receiveNotes(LessonNote notes){
+        this.studentNotes.add(notes);
+    }
+    public String buyNotes(Subject subject){
+        int notePrice = 2;
+        if(!this.registeredSubjects.contains(subject)){
+            notePrice = 5;
+        }
+        boolean canBuy = (this.tokenCount - notePrice >= 0);
+        if(canBuy){
+            LessonNote tempNotes = new LessonNote(subject);
+            this.studentNotes.add(tempNotes);
+            this.updateTokenCount(-notePrice); ;
+            return "Bought "+tempNotes.getNotes()+" successfully.";
+        }
+        return "Insufficient token balance";
+    }
+
     public void updateTokenCount(int numberOfTokens){
         this.tokenCount += numberOfTokens;
     }
+
 
     //getters
     public String getFirstName() {
@@ -74,5 +94,8 @@ public class Student {
     }
     public boolean getInLessonState(){
         return this.inLessonState;
+    }
+    public ArrayList<LessonNote> getStudentNotes(){
+        return this.studentNotes;
     }
 }

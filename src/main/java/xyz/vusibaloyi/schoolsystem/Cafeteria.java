@@ -2,12 +2,12 @@ package xyz.vusibaloyi.schoolsystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Cafeteria {
     private Person customer;
     private HashMap<Person, ArrayList<String>> cafeteriaRecords;
     private HashMap<String, Double> cafeteriaStock;
-    private int cafeteriaRevenue = 0;
 
     public Cafeteria(Person person){
         this.customer = person;
@@ -20,18 +20,16 @@ public class Cafeteria {
     }
 
     public String buyItem(String itemToBuy){
-        double tokenCount = this.customer.getTokenCount();
-        System.out.println("Mock token count "+this.customer.getTokenCount());
-        if(this.cafeteriaStock.containsKey(itemToBuy)){
+        if(cafeteriaStock.containsKey(itemToBuy)){
             double itemPrice = cafeteriaStock.get(itemToBuy);
             if(customer instanceof Teacher){
-                Teacher tmpTeacher = (Teacher) this.customer;
+                Teacher tmpTeacher = (Teacher) customer;
                 if(tmpTeacher.getLessonsTaughtCount() >= 5){
                     itemPrice = itemPrice - (itemPrice * 0.25);
                 }
             }
-
             if(customer.buyFromCafeteria(itemPrice)){
+                updateCafeteriaRecords(customer,itemToBuy);
                 return "Transaction successful";
             }
             return "Insufficient token balance";
@@ -40,6 +38,33 @@ public class Cafeteria {
 
     }
 
+    private void updateCafeteriaRecords(Person customer,String item){
+        ArrayList<String> tmpItems;
+        if(!cafeteriaRecords.containsKey(customer)){
+            tmpItems = new ArrayList<String>();
+            tmpItems.add(item);
+            cafeteriaRecords.put(customer,tmpItems);
+        }else {
+            tmpItems = cafeteriaRecords.get(customer);
+            tmpItems.add(item);
+        }
+    }
+
+    public double getCafeteriaRevenue() {
+        double revenue = 0.00;
+        ArrayList<ArrayList> itemsBoughtLists = new ArrayList<ArrayList>(cafeteriaRecords.values());
+
+        for (ArrayList<String> customerList : itemsBoughtLists) {
+
+            for (String item : customerList) {
+                revenue += cafeteriaStock.get(item);
+            }
+        }
+       return revenue;
+    }
+
 
 
 }
+
+

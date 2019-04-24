@@ -28,11 +28,10 @@ public class Person {
     }
 
     public boolean buyFromCafeteria(Double productPrice){
-        System.out.println("Token count in the person class : "+this.getTokenCount());
         if(productPrice <= this.getTokenCount()){
             this.updateTokenCount(-productPrice);
             return true;
         }
-        return true;
+        return false;
     }
 }

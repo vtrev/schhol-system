@@ -1,15 +1,14 @@
 package xyz.vusibaloyi.schoolsystem;
 import java.util.ArrayList;
 
-public class Student {
+public class Student extends Person{
 
-    private final String firstName;
-    private final String lastName;
-    private  final String emailAddress;
     private  ArrayList<Subject> registeredSubjects;
     private  ArrayList<Lesson> attendedLessons;
-    private ArrayList<LessonNote> studentNotes;
-    private int tokenCount = 0;
+    private ArrayList<LessonNote> attendanceNotes;
+    private ArrayList<LessonNote> purchasedNotes;
+
+
     private boolean inLessonState = false;
 
     public Student(String firstName, String lastName, String emailAddress){
@@ -18,7 +17,9 @@ public class Student {
         this.emailAddress = emailAddress;
         this.registeredSubjects = new ArrayList<Subject>();
         this.attendedLessons = new ArrayList<Lesson>();
-        this.studentNotes = new ArrayList<LessonNote>();
+        this.attendanceNotes = new ArrayList<LessonNote>();
+        this.purchasedNotes = new ArrayList<LessonNote>();
+
     }
     public void registerSubject(Subject subject){
         this.registeredSubjects.add(subject);
@@ -43,8 +44,9 @@ public class Student {
     }
 
     public void receiveNotes(LessonNote notes){
-        this.studentNotes.add(notes);
+        this.attendanceNotes.add(notes);
     }
+
     public String buyNotes(Subject subject){
         int notePrice = 2;
         if(!this.registeredSubjects.contains(subject)){
@@ -53,30 +55,15 @@ public class Student {
         boolean canBuy = (this.tokenCount - notePrice >= 0);
         if(canBuy){
             LessonNote tempNotes = new LessonNote(subject);
-            this.studentNotes.add(tempNotes);
+            this.purchasedNotes.add(tempNotes);
             this.updateTokenCount(-notePrice); ;
             return "Bought "+tempNotes.getNotes()+" successfully.";
         }
         return "Insufficient token balance";
     }
 
-    public void updateTokenCount(int numberOfTokens){
-        this.tokenCount += numberOfTokens;
-    }
-
-
     //getters
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
 
     public ArrayList<Subject> getRegisteredSubjects() {
         return registeredSubjects;
@@ -89,13 +76,18 @@ public class Student {
         return attendedLessons.size();
     }
 
-    public int getTokenCount() {
-        return tokenCount;
+
+
+    public ArrayList<LessonNote> getPurchasedNotes(){
+        return this.purchasedNotes;
     }
+
+    public ArrayList<LessonNote> getAttendanceNotes(){
+        return this.attendanceNotes;
+    }
+
     public boolean getInLessonState(){
         return this.inLessonState;
     }
-    public ArrayList<LessonNote> getStudentNotes(){
-        return this.studentNotes;
-    }
+
 }

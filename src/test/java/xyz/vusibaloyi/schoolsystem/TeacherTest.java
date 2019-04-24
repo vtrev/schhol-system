@@ -69,4 +69,8 @@ class TeacherTest {
         assertEquals(teacher.getTokenCount(), 10);
     }
 
+    @Test
+    void getLessonsTaughtCount() {
+        //add code for lessons taught count
+    }
 }

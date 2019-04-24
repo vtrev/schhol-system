@@ -7,7 +7,6 @@ public class Lesson {
 //    todo : try to take in a Localtime Object instead of string
 
     private Subject subject;
-    private Teacher teacher;
     private String lessonTime;
     private List<Student> studentsInLesson = new ArrayList<Student>();
     private boolean lessonInProgress = false;
@@ -22,7 +21,6 @@ public class Lesson {
 
     public String acceptTeacher(Teacher teacher) {
         if (teacher.getTeacherSubjects().contains(this.subject)) {
-            this.teacher = teacher;
             this.lessonInProgress = true;
             return "Teacher accepted";
         }

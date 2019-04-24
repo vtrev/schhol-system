@@ -10,6 +10,7 @@ public class LessonNote {
     public Subject getSubject(){
         return this.subject;
     }
+
     public String getNotes(){
         return this.subject.name()+"_NOTES";
     }

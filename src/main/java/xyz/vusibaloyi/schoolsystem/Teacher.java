@@ -2,12 +2,10 @@ package xyz.vusibaloyi.schoolsystem;
 
 import java.util.ArrayList;
 
-public class Teacher {
-    private final String firstName;
-    private final String lastName;
-    private final String emailAddress;
+public class Teacher extends Person {
+
     private final  ArrayList<Subject> teacherSubjects;
-    private int tokenCount = 0;
+    private int lessonsTaughtCount = 0;
 
     public Teacher(String firstName, String lastName, String emailAddress,ArrayList<Subject> subjects) {
         this.firstName = firstName;
@@ -19,14 +17,13 @@ public class Teacher {
     public String teachLesson(Lesson lesson){
         if(lesson.startLesson().equals("Lesson started")){
             this.updateTokenCount(5);
+            this.lessonsTaughtCount++;
             return "Lesson started";
         }
         return lesson.startLesson();
     }
 
-
-    //setters
-    public void updateTokenCount(int numberOfTokens){
+    public void updateTokenCount(double numberOfTokens){
         if(this.tokenCount + numberOfTokens >= 0){
             this.tokenCount   += numberOfTokens;
         }
@@ -49,7 +46,11 @@ public class Teacher {
         return teacherSubjects;
     }
 
-    public int getTokenCount(){
+    public double getTokenCount(){
         return tokenCount;
+    }
+
+    public int getLessonsTaughtCount() {
+        return lessonsTaughtCount;
     }
 }

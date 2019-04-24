@@ -63,7 +63,7 @@ class StudentTest {
     void updateTokenCount() {
 
         Student mike = new Student("Mike","Davids","chakaron@makaron.com");
-        int currentTokenCount = mike.getTokenCount();
+        double currentTokenCount = mike.getTokenCount();
         mike.updateTokenCount(15);
 
         assertEquals(currentTokenCount+15,mike.getTokenCount());
@@ -94,7 +94,7 @@ class StudentTest {
         Student beki = new Student("Beki","Khosa","bekinkosikhosa@gmail.com");
         LessonNote economicsNotes = new LessonNote(Subject.ECONOMICS);
         beki.receiveNotes(economicsNotes);
-        assertEquals(beki.getStudentNotes().contains(economicsNotes),true);
+        assertEquals(beki.getAttendanceNotes().contains(economicsNotes),true);
     }
 
     @Test

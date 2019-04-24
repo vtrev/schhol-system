@@ -20,6 +20,8 @@ public class Cafeteria {
     }
 
     public String buyItem(String itemToBuy){
+        double tokenCount = this.customer.getTokenCount();
+        System.out.println("Mock token count "+this.customer.getTokenCount());
         if(this.cafeteriaStock.containsKey(itemToBuy)){
             double itemPrice = cafeteriaStock.get(itemToBuy);
             if(customer instanceof Teacher){
@@ -28,6 +30,7 @@ public class Cafeteria {
                     itemPrice = itemPrice - (itemPrice * 0.25);
                 }
             }
+
             if(customer.buyFromCafeteria(itemPrice)){
                 return "Transaction successful";
             }

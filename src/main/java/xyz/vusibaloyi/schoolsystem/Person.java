@@ -20,7 +20,7 @@ public class Person {
         return this.emailAddress;
     }
     public double getTokenCount() {
-        return tokenCount;
+        return this.tokenCount;
     }
 
     public void updateTokenCount(double numberOfTokens){
@@ -28,10 +28,11 @@ public class Person {
     }
 
     public boolean buyFromCafeteria(Double productPrice){
-        if(productPrice <= this.tokenCount){
+        System.out.println("Token count in the person class : "+this.getTokenCount());
+        if(productPrice <= this.getTokenCount()){
             this.updateTokenCount(-productPrice);
             return true;
         }
-        return false;
+        return true;
     }
 }

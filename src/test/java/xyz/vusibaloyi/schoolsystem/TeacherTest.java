@@ -16,8 +16,8 @@ class TeacherTest {
         subjectList.add(Subject.ACCOUNTING);
         subjectList.add(Subject.ECONOMICS);
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
-        //assertions
 
+        //assertions
         assertEquals(teacher.getFirstName(), "Vusi");
         assertEquals(teacher.getLastName(), "Baloyi");
         assertEquals(teacher.getEmailAddress(), "vusi@baloyi.com");

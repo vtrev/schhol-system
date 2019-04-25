@@ -67,7 +67,7 @@ public class Cafeteria {
             }
         }
         if(record.isEmpty()){
-
+            record = "No items have been purchased yet.";
         }
         return record;
     }

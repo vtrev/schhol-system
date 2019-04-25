@@ -27,15 +27,15 @@ public class Student extends Person{
 
     public String attendLesson(Lesson lesson){
 
-        if(!this.inLessonState){
-        if(this.registeredSubjects.size() >= 3){
-            this.inLessonState = true;
+        if(!inLessonState){
+        if(getRegisteredSubjectCount() >= 3){
+            inLessonState = true;
         this.attendedLessons.add(lesson);
         return "Attending lesson";
         }
         return "Student has  less than 3 subjects registered";
         }
-        return "Cannot attend lesson,student "+this.firstName+" already in lesson.";
+        return "Cannot attend lesson,student "+firstName+" already in lesson.";
     }
 
     public void exitLesson(){

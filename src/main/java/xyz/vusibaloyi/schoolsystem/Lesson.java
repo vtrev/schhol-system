@@ -29,7 +29,7 @@ public class Lesson {
 
     public String acceptStudent(Student student) {
         if (student.getRegisteredSubjectCount() >= 3) {
-            if (student.getRegisteredSubjects().contains(this.subject)) {
+            if (student.getRegisteredSubjects().contains(subject)) {
                 studentsInLesson.add(student);
                 return "Student accepted";
             }

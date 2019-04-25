@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import static org.mockito.Mockito.*;
 
 
@@ -50,7 +49,7 @@ class CafeteriaTest {
         HashMap<String,Double> cafStock =  CafeteriaStock.getCafeteriaStock();
         Cafeteria caf = new Cafeteria(cafStock);
 
-        //assertions
+        //assertion
         assertEquals(caf.buyItem(mikePersonMock,"Some product that is not in the stock"),"Item not found in stock");
     }
 
@@ -79,12 +78,13 @@ class CafeteriaTest {
         caf.buyItem(vusiPersonMock,"Drink");
         caf.buyItem(vusiPersonMock,"Snack");
 
+        //assertion
         assertEquals(caf.getCafeteriaRevenue(),11.00);
 
     }
 
     @Test
-    void getCafeteriaRecords() {
+    void shouldReturnCafeteriaRecords() {
         HashMap<String,Double> cafStock =  CafeteriaStock.getCafeteriaStock();
         Cafeteria caf = new Cafeteria(cafStock);
         Person jimmyPersonMock = spy(new Person());
@@ -105,7 +105,7 @@ class CafeteriaTest {
         caf.buyItem(joeyPersonMock,"Drink");
         caf.buyItem(sammyPersonMock,"Lunch");
 
-        assertEquals(caf.getCafeteriaRecords() ,"\nCustomer : Sammy\n" +
+        String expectedResult = "\nCustomer : Sammy\n" +
                 "Item(s)  :[Snack, Lunch]\n" +
                 "===========================================\n" +
                 "Customer : Joey\n" +
@@ -113,8 +113,18 @@ class CafeteriaTest {
                 "===========================================\n" +
                 "Customer : Jimmy\n" +
                 "Item(s)  :[Lunch, Drink]\n" +
-                "===========================================");
+                "===========================================";
+        //assertion
+        assertEquals(caf.getCafeteriaRecords(),expectedResult);
     }
 
+    @Test
+    void shouldReturnMessageIfNoPurchasesHaveBeenMade() {
+        HashMap<String, Double> cafStock = CafeteriaStock.getCafeteriaStock();
+        Cafeteria caf = new Cafeteria(cafStock);
+
+        //assertion without buying anything
+        assertEquals(caf.getCafeteriaRecords(),"No items have been purchased yet.");
+    }
 
 }

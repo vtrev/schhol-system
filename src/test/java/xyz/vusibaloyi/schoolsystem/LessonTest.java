@@ -4,26 +4,33 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 class LessonTest {
 
     @Test
     void acceptQualifiedTeacher() {
-        ArrayList<Subject> subjectList = new ArrayList<Subject>();
-        subjectList.add(Subject.ACCOUNTING);
-        subjectList.add(Subject.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>(){{
+            add(Subject.ACCOUNTING);
+            add(Subject.ECONOMICS);
+        }};
         Teacher teacher = new Teacher("Mike", "John", "vusi@baloyi.com", subjectList);
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "10:00");
+
         //assertion
         assertEquals(accountingLesson.acceptTeacher(teacher), "Teacher accepted");
     }
 
     @Test
     void rejectUnqualifiedTeacher() {
-        ArrayList<Subject> subjectList = new ArrayList<Subject>();
-        subjectList.add(Subject.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>(){{
+            add(Subject.ECONOMICS);
+        }};
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "12:00");
+
+        //assertion
         assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
     }
 
@@ -31,19 +38,24 @@ class LessonTest {
     void acceptRegisteredStudent() {
         Lesson economicsLesson = new Lesson(Subject.ECONOMICS,"15:00");
         Student vusi = new Student("Vusi","Joey","joey@mail.ru");
-        vusi.registerSubject(Subject.ENGLISH);
-        vusi.registerSubject(Subject.ECONOMICS);
-        vusi.registerSubject(Subject.ACCOUNTING);
+        SubjectRegistrar.registerSubjects(vusi,"ECONOMICS,ENGLISH,ACCOUNTING");
+
+        //asserion
         assertEquals(economicsLesson.acceptStudent(vusi),"Student accepted");
     }
 
     @Test
     void rejectUnregisteredStudent() {
-        Lesson economicsLesson = new Lesson(Subject.COMPUTER_SCIENCE,"15:00");
-        Student vusi = new Student("Vusi","Joey","joey@mail.ru");
+        Student vusi = spy(new Student("Vusi","Nthuxi","vusi@bal.com"));
+        //mock a registered subject count of 5
+        doReturn(5).when(vusi).getRegisteredSubjectCount();
+
+        Lesson economicsLesson = new Lesson(Subject.STATISTICS,"15:00");
         vusi.registerSubject(Subject.ENGLISH);
         vusi.registerSubject(Subject.ECONOMICS);
         vusi.registerSubject(Subject.ACCOUNTING);
+
+        //assertion
         assertEquals(economicsLesson.acceptStudent(vusi),"Student rejected, not registered for subject");
     }
 

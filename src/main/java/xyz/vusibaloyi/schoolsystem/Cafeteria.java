@@ -1,25 +1,21 @@
 package xyz.vusibaloyi.schoolsystem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Set;
 
 public class Cafeteria {
-    private Person customer;
-    private HashMap<Person, ArrayList<String>> cafeteriaRecords;
+
+    private HashMap<String, ArrayList<String>> cafeteriaRecords;
     private HashMap<String, Double> cafeteriaStock;
 
-    public Cafeteria(Person person){
-        this.customer = person;
-        this.cafeteriaRecords = new HashMap<Person,ArrayList<String>>();
-        this.cafeteriaStock = new HashMap<String, Double>();
-        this.cafeteriaStock.put("Breakfast",4.00);
-        this.cafeteriaStock.put("Lunch",6.00);
-        this.cafeteriaStock.put("Snack",3.00);
-        this.cafeteriaStock.put("Drink",2.00);
+    public Cafeteria(HashMap<String, Double> cafeteriaStockIn){
+        this.cafeteriaStock = cafeteriaStockIn;
+        this.cafeteriaRecords = new HashMap<String,ArrayList<String>>();
     }
 
-    public String buyItem(String itemToBuy){
+    public String buyItem(Person customer,String itemToBuy){
         if(cafeteriaStock.containsKey(itemToBuy)){
             double itemPrice = cafeteriaStock.get(itemToBuy);
             if(customer instanceof Teacher){
@@ -40,22 +36,22 @@ public class Cafeteria {
 
     private void updateCafeteriaRecords(Person customer,String item){
         ArrayList<String> tmpItems;
-        if(!cafeteriaRecords.containsKey(customer)){
+        if(!cafeteriaRecords.containsKey(customer.getFirstName())){
             tmpItems = new ArrayList<String>();
             tmpItems.add(item);
-            cafeteriaRecords.put(customer,tmpItems);
+            cafeteriaRecords.put(customer.getFirstName(),tmpItems);
         }else {
-            tmpItems = cafeteriaRecords.get(customer);
+            tmpItems = cafeteriaRecords.get(customer.getFirstName());
             tmpItems.add(item);
+            cafeteriaRecords.put(customer.getFirstName(),tmpItems);
         }
     }
 
     public double getCafeteriaRevenue() {
-        double revenue = 0.00;
         ArrayList<ArrayList> itemsBoughtLists = new ArrayList<ArrayList>(cafeteriaRecords.values());
+        double revenue = 0.00;
 
         for (ArrayList<String> customerList : itemsBoughtLists) {
-
             for (String item : customerList) {
                 revenue += cafeteriaStock.get(item);
             }
@@ -63,7 +59,18 @@ public class Cafeteria {
        return revenue;
     }
 
+    public String getCafeteriaRecords() {
+        String record = "";
+        if(cafeteriaRecords.keySet().size() > 0){
+            for (String customerName : cafeteriaRecords.keySet()){
+            record = record+ "\nCustomer : "+ customerName+"\nItem(s)  :" +cafeteriaRecords.get(customerName)+"\n===========================================";
+            }
+        }
+        if(record.isEmpty()){
 
+        }
+        return record;
+    }
 
 }
 

@@ -53,19 +53,21 @@ public class Student extends Person {
         return getRegisteredSubjects().contains(subject);
     }
 
-    public String buyNotes(Subject subject){
+    public String buyNotes(LessonNote notes,Student seller){
+        if(seller.getPurchasedNotes().contains(notes) | seller.getAttendanceNotes().contains(notes)){
         int notePrice = 2;
-        if(!isRegisteredSubject(subject)){
+        if(!isRegisteredSubject(notes.getSubject())){
             notePrice = 5;
         }
         boolean canBuy = (getTokenCount() - notePrice >= 0);
         if(canBuy){
-            LessonNote tempNotes = new LessonNote(subject);
-            purchasedNotes.add(tempNotes);
+            purchasedNotes.add(notes);
             updateTokenCount(-notePrice); ;
-            return "Bought "+tempNotes.getNotes()+" successfully.";
+            return "Bought "+notes.getNotes()+" successfully.";
         }
         return "Insufficient token balance";
+        }
+        return "Cannot complete transaction,seller "+seller.getFirstName()+ " does not have "+notes.getNotes();
     }
 
     //getters
@@ -92,6 +94,11 @@ public class Student extends Person {
 
     public boolean getInLessonState(){
         return inLessonState;
+    }
+
+    //setter
+    public void setPurchasedNotes(LessonNote notes){
+        this.purchasedNotes.add(notes);
     }
 
 }

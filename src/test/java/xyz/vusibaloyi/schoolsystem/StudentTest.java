@@ -7,6 +7,8 @@ import xyz.vusibaloyi.schoolsystem.person.Student;
 import xyz.vusibaloyi.schoolsystem.subject.Subject;
 import xyz.vusibaloyi.schoolsystem.subject.SubjectRegistrar;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -97,13 +99,20 @@ class StudentTest {
         Lesson economicsLesson = new Lesson(Subject.ECONOMICS,"11:00");
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING,"12:00");
 
-        Student bhekiStudentMock = spy(new Student("Beki","Khosa","bekinkosikhosa@gmail.com"));
-        doReturn(4).when(bhekiStudentMock).getRegisteredSubjectCount();
-        doReturn(true).when(bhekiStudentMock).isRegisteredSubject(Subject.ECONOMICS);
-        doReturn(45.00).when(bhekiStudentMock).getTokenCount();
+        LessonNote notesMock = spy(new LessonNote(Subject.ECONOMICS));
+        Student buyerStudentMock = spy(new Student("Buyer","Buy","ibuy@gmail.com"));
+        Student sellerStudentMock = spy(new Student("Seller","Sell","isell@gmail.com"));
+        ArrayList<LessonNote> sellerNotes = new ArrayList<LessonNote>(){{
+            add(notesMock);
+        }};
+
+        doReturn(sellerNotes).when(sellerStudentMock).getPurchasedNotes();
+        doReturn(true).when(buyerStudentMock).isRegisteredSubject(Subject.ECONOMICS);
+        doReturn(4).when(buyerStudentMock).getRegisteredSubjectCount();
+        doReturn(45.00).when(buyerStudentMock).getTokenCount();
 
         //assertion
-        assertEquals(bhekiStudentMock.buyNotes(Subject.ECONOMICS),"Bought ECONOMICS_NOTES successfully.");
+        assertEquals(buyerStudentMock.buyNotes(notesMock,sellerStudentMock),"Bought ECONOMICS_NOTES successfully.");
 
     }
 
@@ -112,13 +121,21 @@ class StudentTest {
         Lesson economicsLesson = new Lesson(Subject.ECONOMICS,"11:00");
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING,"12:00");
 
-        Student khosaStudentMock = spy(new Student("Gideon","Khosa","khosa@gmail.com"));
-        doReturn(4).when(khosaStudentMock).getRegisteredSubjectCount();
-        doReturn(true).when(khosaStudentMock).isRegisteredSubject(Subject.ECONOMICS);
-        doReturn(1.00).when(khosaStudentMock).getTokenCount();
+        LessonNote notesMock = spy(new LessonNote(Subject.ECONOMICS));
+        Student buyerStudentMock = spy(new Student("Buyer","Buy","ibuy@gmail.com"));
+        Student sellerStudentMock = spy(new Student("Seller","Sell","isell@gmail.com"));
+
+        ArrayList<LessonNote> sellerNotes = new ArrayList<LessonNote>(){{
+            add(notesMock);
+        }};
+
+        doReturn(sellerNotes).when(sellerStudentMock).getAttendanceNotes();
+        doReturn(true).when(buyerStudentMock).isRegisteredSubject(Subject.ECONOMICS);
+        doReturn(4).when(buyerStudentMock).getRegisteredSubjectCount();
+        doReturn(1.00).when(buyerStudentMock).getTokenCount();
 
         //assertion
-        assertEquals(khosaStudentMock.buyNotes(Subject.ECONOMICS),"Insufficient token balance");
+        assertEquals(buyerStudentMock.buyNotes(notesMock,sellerStudentMock),"Insufficient token balance");
 
     }
 

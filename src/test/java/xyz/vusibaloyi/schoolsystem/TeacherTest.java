@@ -1,6 +1,10 @@
 package xyz.vusibaloyi.schoolsystem;
 
 import org.junit.jupiter.api.Test;
+import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
+import xyz.vusibaloyi.schoolsystem.person.Student;
+import xyz.vusibaloyi.schoolsystem.person.Teacher;
+import xyz.vusibaloyi.schoolsystem.subject.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +33,11 @@ class TeacherTest {
     @Test
     void qualifiedTeacherShouldBeAbleToTeach() {
         // initialize
-        ArrayList<Subject> subjectList = new ArrayList<Subject>();
-        subjectList.add(Subject.ACCOUNTING);
-        subjectList.add(Subject.ECONOMICS);
+        ArrayList<Subject> subjectList = new ArrayList<Subject>(){{
+            add(Subject.ACCOUNTING);
+            add(Subject.ECONOMICS);
+        }};
+
         Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "10:00");
         List<Student> dummyStudents = TestStudents.generateStudents();
@@ -67,10 +73,5 @@ class TeacherTest {
         assertEquals(teacher.getTokenCount(), 15);
         teacher.updateTokenCount(-5);
         assertEquals(teacher.getTokenCount(), 10);
-    }
-
-    @Test
-    void getLessonsTaughtCount() {
-        //add code for lessons taught count
     }
 }

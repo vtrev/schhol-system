@@ -1,4 +1,4 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.cafeteria;
 import java.util.HashMap;
 
 public class CafeteriaStock {

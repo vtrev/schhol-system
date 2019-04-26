@@ -1,10 +1,22 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.person;
 
 public class Person {
     public  String firstName;
     public  String lastName;
     public  String emailAddress;
     public double tokenCount = 0;
+
+    public void updateTokenCount(double numberOfTokens){
+        this.tokenCount += numberOfTokens;
+    }
+
+    public boolean hasSufficientTokens(Double productPrice){
+        if(productPrice <= getTokenCount()){
+            return true;
+        }
+        return false;
+    }
+
 
 
     //getters
@@ -23,15 +35,4 @@ public class Person {
         return this.tokenCount;
     }
 
-    public void updateTokenCount(double numberOfTokens){
-        this.tokenCount += numberOfTokens;
-    }
-
-    public boolean buyFromCafeteria(Double productPrice){
-        if(productPrice <= this.getTokenCount()){
-            this.updateTokenCount(-productPrice);
-            return true;
-        }
-        return false;
-    }
 }

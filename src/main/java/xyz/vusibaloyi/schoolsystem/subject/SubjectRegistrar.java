@@ -1,6 +1,7 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.subject;
 
-import java.util.ArrayList;
+import xyz.vusibaloyi.schoolsystem.person.Student;
+import xyz.vusibaloyi.schoolsystem.subject.Subject;
 
 public class SubjectRegistrar {
 
@@ -9,7 +10,6 @@ public class SubjectRegistrar {
         String[] subjectList = subjectsToRegister.split(",");
 
         //register student for the given  subjects
-
         int count = 0;
         for (String subject : subjectList) {
             try{

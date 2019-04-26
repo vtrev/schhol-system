@@ -1,4 +1,7 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.person;
+
+import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
+import xyz.vusibaloyi.schoolsystem.subject.Subject;
 
 import java.util.ArrayList;
 

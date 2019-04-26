@@ -1,9 +1,10 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.cafeteria;
 
-import java.lang.reflect.Array;
+import xyz.vusibaloyi.schoolsystem.person.Person;
+import xyz.vusibaloyi.schoolsystem.person.Teacher;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Cafeteria {
 
@@ -15,7 +16,7 @@ public class Cafeteria {
         this.cafeteriaRecords = new HashMap<String,ArrayList<String>>();
     }
 
-    public String buyItem(Person customer,String itemToBuy){
+    public String buyItem(Person customer, String itemToBuy){
         if(cafeteriaStock.containsKey(itemToBuy)){
             double itemPrice = cafeteriaStock.get(itemToBuy);
             if(customer instanceof Teacher){
@@ -24,7 +25,8 @@ public class Cafeteria {
                     itemPrice = itemPrice - (itemPrice * 0.25);
                 }
             }
-            if(customer.buyFromCafeteria(itemPrice)){
+            if(customer.hasSufficientTokens(itemPrice)){
+                customer.updateTokenCount(-itemPrice);
                 updateCafeteriaRecords(customer,itemToBuy);
                 return "Transaction successful";
             }

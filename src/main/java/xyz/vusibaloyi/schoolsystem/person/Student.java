@@ -1,14 +1,16 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.person;
+import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
+import xyz.vusibaloyi.schoolsystem.lesson.LessonNote;
+import xyz.vusibaloyi.schoolsystem.subject.Subject;
+
 import java.util.ArrayList;
 
-public class Student extends Person{
+public class Student extends Person {
 
     private  ArrayList<Subject> registeredSubjects;
     private  ArrayList<Lesson> attendedLessons;
     private ArrayList<LessonNote> attendanceNotes;
     private ArrayList<LessonNote> purchasedNotes;
-
-
     private boolean inLessonState = false;
 
     public Student(String firstName, String lastName, String emailAddress){
@@ -21,8 +23,9 @@ public class Student extends Person{
         this.purchasedNotes = new ArrayList<LessonNote>();
 
     }
+
     public void registerSubject(Subject subject){
-        this.registeredSubjects.add(subject);
+        registeredSubjects.add(subject);
     }
 
     public String attendLesson(Lesson lesson){
@@ -30,7 +33,7 @@ public class Student extends Person{
         if(!inLessonState){
         if(getRegisteredSubjectCount() >= 3){
             inLessonState = true;
-        this.attendedLessons.add(lesson);
+            attendedLessons.add(lesson);
         return "Attending lesson";
         }
         return "Student has  less than 3 subjects registered";
@@ -39,24 +42,27 @@ public class Student extends Person{
     }
 
     public void exitLesson(){
-        this.updateTokenCount(3);
-        this.inLessonState = false;
+        inLessonState = false;
     }
 
     public void receiveNotes(LessonNote notes){
-        this.attendanceNotes.add(notes);
+        attendanceNotes.add(notes);
+    }
+
+    public boolean isRegisteredSubject(Subject subject){
+        return getRegisteredSubjects().contains(subject);
     }
 
     public String buyNotes(Subject subject){
         int notePrice = 2;
-        if(!this.registeredSubjects.contains(subject)){
+        if(!isRegisteredSubject(subject)){
             notePrice = 5;
         }
-        boolean canBuy = (this.tokenCount - notePrice >= 0);
+        boolean canBuy = (getTokenCount() - notePrice >= 0);
         if(canBuy){
             LessonNote tempNotes = new LessonNote(subject);
-            this.purchasedNotes.add(tempNotes);
-            this.updateTokenCount(-notePrice); ;
+            purchasedNotes.add(tempNotes);
+            updateTokenCount(-notePrice); ;
             return "Bought "+tempNotes.getNotes()+" successfully.";
         }
         return "Insufficient token balance";
@@ -64,30 +70,28 @@ public class Student extends Person{
 
     //getters
 
-
     public ArrayList<Subject> getRegisteredSubjects() {
         return registeredSubjects;
     }
+
     public int getRegisteredSubjectCount(){
-        return this.registeredSubjects.size();
+        return registeredSubjects.size();
     }
 
     public int getAttendedLessonsCount() {
         return attendedLessons.size();
     }
 
-
-
     public ArrayList<LessonNote> getPurchasedNotes(){
-        return this.purchasedNotes;
+        return purchasedNotes;
     }
 
     public ArrayList<LessonNote> getAttendanceNotes(){
-        return this.attendanceNotes;
+        return attendanceNotes;
     }
 
     public boolean getInLessonState(){
-        return this.inLessonState;
+        return inLessonState;
     }
 
 }

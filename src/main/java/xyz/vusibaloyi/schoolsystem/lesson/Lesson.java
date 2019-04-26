@@ -1,10 +1,13 @@
-package xyz.vusibaloyi.schoolsystem;
+package xyz.vusibaloyi.schoolsystem.lesson;
+
+import xyz.vusibaloyi.schoolsystem.subject.Subject;
+import xyz.vusibaloyi.schoolsystem.person.Student;
+import xyz.vusibaloyi.schoolsystem.person.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lesson {
-//    todo : try to take in a Localtime Object instead of string
 
     private Subject subject;
     private String lessonTime;
@@ -52,9 +55,10 @@ public class Lesson {
     }
 
     public void endLesson() {
-        for (Student s : this.studentsInLesson) {
-            s.receiveNotes(this.notes);
-            s.exitLesson();
+        for (Student student : this.studentsInLesson) {
+            student.receiveNotes(this.notes);
+            student.updateTokenCount(3);
+            student.exitLesson();
         }
     }
 }

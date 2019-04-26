@@ -1,6 +1,12 @@
 package xyz.vusibaloyi.schoolsystem;
 
 import org.junit.jupiter.api.Test;
+import xyz.vusibaloyi.schoolsystem.cafeteria.Cafeteria;
+import xyz.vusibaloyi.schoolsystem.cafeteria.CafeteriaStock;
+import xyz.vusibaloyi.schoolsystem.person.Person;
+import xyz.vusibaloyi.schoolsystem.person.Teacher;
+import xyz.vusibaloyi.schoolsystem.subject.Subject;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.HashMap;

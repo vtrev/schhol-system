@@ -2,6 +2,7 @@ package xyz.vusibaloyi.schoolsystem;
 
 import org.junit.jupiter.api.Test;
 import xyz.vusibaloyi.schoolsystem.cafeteria.Cafeteria;
+import xyz.vusibaloyi.schoolsystem.cafeteria.CafeteriaStatus;
 import xyz.vusibaloyi.schoolsystem.cafeteria.CafeteriaStock;
 import xyz.vusibaloyi.schoolsystem.person.Person;
 import xyz.vusibaloyi.schoolsystem.person.Teacher;
@@ -24,10 +25,10 @@ class CafeteriaTest {
         HashMap<String,Double> cafStock =  CafeteriaStock.getCafeteriaStock();
         Cafeteria caf = new Cafeteria(cafStock);
 
-        assertEquals(caf.buyItem(vusiPersonMock,"Breakfast"),"Transaction successful");
-        assertEquals(caf.buyItem(vusiPersonMock,"Lunch"),"Transaction successful");
-        assertEquals(caf.buyItem(vusiPersonMock,"Snack"),"Transaction successful");
-        assertEquals(caf.buyItem(vusiPersonMock,"Drink"),"Transaction successful");
+        assertEquals(caf.buyItem(vusiPersonMock,"Breakfast"), CafeteriaStatus.SUCCESS.getMessage());
+        assertEquals(caf.buyItem(vusiPersonMock,"Lunch"),CafeteriaStatus.SUCCESS.getMessage());
+        assertEquals(caf.buyItem(vusiPersonMock,"Snack"),CafeteriaStatus.SUCCESS.getMessage());
+        assertEquals(caf.buyItem(vusiPersonMock,"Drink"),CafeteriaStatus.SUCCESS.getMessage());
     }
 
     @Test
@@ -40,10 +41,10 @@ class CafeteriaTest {
         Cafeteria caf = new Cafeteria(cafStock);
 
         //assertions
-        assertEquals(caf.buyItem(joePersonMock,"Breakfast"),"Insufficient token balance");
-        assertEquals(caf.buyItem(joePersonMock,"Lunch"),"Insufficient token balance");
-        assertEquals(caf.buyItem(joePersonMock,"Snack"),"Insufficient token balance");
-        assertEquals(caf.buyItem(joePersonMock,"Drink"),"Insufficient token balance");
+        assertEquals(caf.buyItem(joePersonMock,"Breakfast"),CafeteriaStatus.LOW_BALANCE.getMessage());
+        assertEquals(caf.buyItem(joePersonMock,"Lunch"),CafeteriaStatus.LOW_BALANCE.getMessage());
+        assertEquals(caf.buyItem(joePersonMock,"Snack"),CafeteriaStatus.LOW_BALANCE.getMessage());
+        assertEquals(caf.buyItem(joePersonMock,"Drink"),CafeteriaStatus.LOW_BALANCE.getMessage());
     }
 
     @Test
@@ -55,7 +56,7 @@ class CafeteriaTest {
         Cafeteria caf = new Cafeteria(cafStock);
 
         //assertion
-        assertEquals(caf.buyItem(mikePersonMock,"Some product that is not in the stock"),"Item not found in stock");
+        assertEquals(caf.buyItem(mikePersonMock,"Some product that is not in the stock"),CafeteriaStatus.NO_STOCK.getMessage());
     }
 
     @Test
@@ -67,7 +68,7 @@ class CafeteriaTest {
         HashMap<String,Double> cafStock =  CafeteriaStock.getCafeteriaStock();
         Cafeteria caf = new Cafeteria(cafStock);
         // Lunch costs 6 tokens but bill should be able to buy it using 4.5 since he has taught more than 5 lessons (7)
-        assertEquals(caf.buyItem(billTeacherMock,"Lunch"),"Transaction successful");
+        assertEquals(caf.buyItem(billTeacherMock,"Lunch"),CafeteriaStatus.SUCCESS.getMessage());
     }
 
     @Test
@@ -129,7 +130,7 @@ class CafeteriaTest {
         Cafeteria caf = new Cafeteria(cafStock);
 
         //assertion without buying anything
-        assertEquals(caf.getCafeteriaRecords(),"No items have been purchased yet.");
+        assertEquals(caf.getCafeteriaRecords(),CafeteriaStatus.NO_SALES_RECORD.getMessage());
     }
 
 }

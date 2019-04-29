@@ -28,11 +28,11 @@ public class Cafeteria {
             if(customer.hasSufficientTokens(itemPrice)){
                 customer.updateTokenCount(-itemPrice);
                 updateCafeteriaRecords(customer,itemToBuy);
-                return "Transaction successful";
+                return CafeteriaStatus.SUCCESS.getMessage();
             }
-            return "Insufficient token balance";
+            return CafeteriaStatus.LOW_BALANCE.getMessage();
         }
-        return "Item not found in stock";
+        return CafeteriaStatus.NO_STOCK.getMessage();
 
     }
 
@@ -69,7 +69,7 @@ public class Cafeteria {
             }
         }
         if(record.isEmpty()){
-            record = "No items have been purchased yet.";
+            record = CafeteriaStatus.NO_SALES_RECORD.getMessage();
         }
         return record;
     }

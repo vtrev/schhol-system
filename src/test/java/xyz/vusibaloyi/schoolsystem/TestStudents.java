@@ -1,7 +1,6 @@
 package xyz.vusibaloyi.schoolsystem;
 
 import xyz.vusibaloyi.schoolsystem.person.Student;
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
 
 import java.util.ArrayList;
 import java.util.List;

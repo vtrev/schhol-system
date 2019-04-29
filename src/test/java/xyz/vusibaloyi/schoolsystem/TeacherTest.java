@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
 import xyz.vusibaloyi.schoolsystem.person.Student;
 import xyz.vusibaloyi.schoolsystem.person.Teacher;
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
 
 import java.util.ArrayList;
 import java.util.List;

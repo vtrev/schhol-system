@@ -1,6 +1,6 @@
 package xyz.vusibaloyi.schoolsystem.lesson;
 
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
+import xyz.vusibaloyi.schoolsystem.Subject;
 
 public class LessonNote {
     private Subject subject;

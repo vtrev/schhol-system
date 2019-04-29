@@ -1,4 +1,4 @@
-package xyz.vusibaloyi.schoolsystem.subject;
+package xyz.vusibaloyi.schoolsystem;
 
 public enum Subject {
     ENGLISH,

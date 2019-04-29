@@ -1,6 +1,6 @@
 package xyz.vusibaloyi.schoolsystem.lesson;
 
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
+import xyz.vusibaloyi.schoolsystem.Subject;
 import xyz.vusibaloyi.schoolsystem.person.Student;
 import xyz.vusibaloyi.schoolsystem.person.Teacher;
 

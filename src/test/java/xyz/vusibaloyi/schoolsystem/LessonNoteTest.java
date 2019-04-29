@@ -2,7 +2,6 @@ package xyz.vusibaloyi.schoolsystem;
 
 import org.junit.jupiter.api.Test;
 import xyz.vusibaloyi.schoolsystem.lesson.LessonNote;
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
 
 import static org.junit.jupiter.api.Assertions.*;
 

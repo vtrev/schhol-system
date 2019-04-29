@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
 import xyz.vusibaloyi.schoolsystem.person.Student;
 import xyz.vusibaloyi.schoolsystem.person.Teacher;
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
-import xyz.vusibaloyi.schoolsystem.subject.SubjectRegistrar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +42,10 @@ class LessonTest {
     void acceptRegisteredStudent() {
         Lesson economicsLesson = new Lesson(Subject.ECONOMICS,"15:00");
         Student vusi = new Student("Vusi","Joey","joey@mail.ru");
-        SubjectRegistrar.registerSubjects(vusi,"ECONOMICS,ENGLISH,ACCOUNTING");
-
+        vusi.registerSubject(Subject.ECONOMICS);
+        vusi.registerSubject(Subject.ENGLISH);
+        vusi.registerSubject(Subject.ACCOUNTING);
+        
         //asserion
         assertEquals(economicsLesson.acceptStudent(vusi),"Student accepted");
     }

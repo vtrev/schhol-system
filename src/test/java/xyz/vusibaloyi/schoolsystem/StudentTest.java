@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
 import xyz.vusibaloyi.schoolsystem.lesson.LessonNote;
 import xyz.vusibaloyi.schoolsystem.person.Student;
-import xyz.vusibaloyi.schoolsystem.subject.Subject;
-import xyz.vusibaloyi.schoolsystem.subject.SubjectRegistrar;
 
 import java.util.ArrayList;
 
@@ -47,7 +45,8 @@ class StudentTest {
     void DoNotAttendLessonIfNotRegisteredFor3OrMoreSubjects() {
         Student studentX = new Student("Foo","Bar","foo@bar.ru");
         //register only 2 subjects for studentX
-        SubjectRegistrar.registerSubjects(studentX,"COMPUTER_SCIENCE,ECONOMICS");
+        studentX.registerSubject(Subject.ECONOMICS);
+        studentX.registerSubject(Subject.COMPUTER_SCIENCE);
         Lesson computerScienceLesson = new Lesson(Subject.COMPUTER_SCIENCE,"11:00");
 
         //assertion

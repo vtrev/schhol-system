@@ -69,7 +69,14 @@ public class Student extends Person {
         }
         return "Cannot complete transaction,seller "+seller.getFirstName()+ " does not have "+notes.getNotes();
     }
+    
+    
+    //setter
+    public void setPurchasedNotes(LessonNote notes){
+        this.purchasedNotes.add(notes);
+    }
 
+    
     //getters
 
     public ArrayList<Subject> getRegisteredSubjects() {
@@ -96,9 +103,5 @@ public class Student extends Person {
         return inLessonState;
     }
 
-    //setter
-    public void setPurchasedNotes(LessonNote notes){
-        this.purchasedNotes.add(notes);
-    }
-
+ 
 }

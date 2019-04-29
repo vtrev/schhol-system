@@ -140,15 +140,6 @@ class StudentTest {
     }
 
     //move this test to Person test
-    @Test
-    void updateTokenCount() {
-
-        Student mike = new Student("Mike","Davids","chakaron@makaron.com");
-        double currentTokenCount = mike.getTokenCount();
-        mike.updateTokenCount(15);
-
-        assertEquals(currentTokenCount+15,mike.getTokenCount());
-    }
 
 
 }

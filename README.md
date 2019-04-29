@@ -1,1 +1,1 @@
-# school-system
+[![Build Status](https://travis-ci.org/vtrev/school-system.svg?branch=master)](https://travis-ci.org/vtrev/school-system)

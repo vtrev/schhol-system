@@ -59,7 +59,7 @@ class TeacherTest {
         Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "12:00");
 
         //assertion
-        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
+        assertEquals(teacher.teachLesson(accountingLesson), "Cannot start lesson, no qualified teacher available");
     }
 
     @Test

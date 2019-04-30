@@ -13,7 +13,6 @@ public class CafeteriaStock {
 
      //getter
     public  static HashMap<String, Double> getCafeteriaStock() {
-
          return cafeteriaStock;
     }
 }

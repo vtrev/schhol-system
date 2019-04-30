@@ -26,17 +26,18 @@ class LessonTest {
         assertEquals(accountingLesson.acceptTeacher(teacher), "Teacher accepted");
     }
 
-    @Test
-    void rejectUnqualifiedTeacher() {
-        ArrayList<Subject> subjectList = new ArrayList<Subject>(){{
-            add(Subject.ECONOMICS);
-        }};
-        Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
-        Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "12:00");
-
-        //assertion
-        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
-    }
+    //change this to lesson test or move to teacher test
+//    @Test
+//    void rejectUnqualifiedTeacher() {
+//        ArrayList<Subject> subjectList = new ArrayList<Subject>(){{
+//            add(Subject.ECONOMICS);
+//        }};
+//        Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
+//        Lesson accountingLesson = new Lesson(Subject.ACCOUNTING, "12:00");
+//
+//        //assertion
+//        assertEquals(teacher.teachLesson(accountingLesson), "Teacher not qualified to teach this lesson");
+//    }
 
     @Test
     void acceptRegisteredStudent() {
@@ -98,7 +99,7 @@ class LessonTest {
         Lesson economicsLesson = new Lesson(Subject.ECONOMICS, "15:00");
         economicsLesson.acceptTeacher(teacher);
         //assertion
-        assertEquals(economicsLesson.startLesson(),"Teacher not qualified to teach this lesson");
+        assertEquals(economicsLesson.startLesson(),"Cannot start lesson, no qualified teacher available");
     }
 
     @Test

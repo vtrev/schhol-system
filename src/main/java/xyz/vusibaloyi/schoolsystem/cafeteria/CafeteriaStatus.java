@@ -8,7 +8,7 @@ public enum CafeteriaStatus {
     
     private String message;
     
-    private CafeteriaStatus(String message) {
+    CafeteriaStatus(String message) {
     this.message = message;
     
     }

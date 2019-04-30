@@ -13,7 +13,7 @@ public class Cafeteria {
 
     public Cafeteria(HashMap<String, Double> cafeteriaStockIn){
         this.cafeteriaStock = cafeteriaStockIn;
-        this.cafeteriaRecords = new HashMap<String,ArrayList<String>>();
+        this.cafeteriaRecords = new HashMap<>();
     }
 
     public String buyItem(Person customer, String itemToBuy){
@@ -39,7 +39,7 @@ public class Cafeteria {
     private void updateCafeteriaRecords(Person customer,String item){
         ArrayList<String> tmpItems;
         if(!cafeteriaRecords.containsKey(customer.getFirstName())){
-            tmpItems = new ArrayList<String>();
+            tmpItems = new ArrayList<>();
             tmpItems.add(item);
             cafeteriaRecords.put(customer.getFirstName(),tmpItems);
         }else {

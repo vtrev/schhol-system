@@ -21,7 +21,7 @@ public class Teacher extends Person {
         if(lesson.startLesson().equals("Lesson started")){
             this.updateTokenCount(5);
             this.lessonsTaughtCount++;
-            return "Lesson started";
+            return lesson.startLesson();
         }
         return lesson.startLesson();
     }

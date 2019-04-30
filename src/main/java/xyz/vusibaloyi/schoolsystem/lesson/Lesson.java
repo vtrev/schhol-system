@@ -25,20 +25,20 @@ public class Lesson {
     public String acceptTeacher(Teacher teacher) {
         if (teacher.getTeacherSubjects().contains(this.subject)) {
             this.lessonInProgress = true;
-            return "Teacher accepted";
+            return LessonStatusCode.ACCEPT_TEACHER.getMessage();
         }
-        return "Teacher rejected,unqualified teacher";
+        return LessonStatusCode.REJECT_TEACHER.getMessage();
     }
 
     public String acceptStudent(Student student) {
         if (student.getRegisteredSubjectCount() >= 3) {
             if (student.getRegisteredSubjects().contains(subject)) {
                 studentsInLesson.add(student);
-                return "Student accepted";
+                return LessonStatusCode.ACCEPT_STUDENT.getMessage();
             }
-            return "Student rejected, not registered for subject";
+            return LessonStatusCode.REJECT_STUDENT_NOREG.getMessage();
         }
-        return "Student rejected, not enough registered subjects";
+        return LessonStatusCode.REJECT_STUDENT_NO_ENOUGHSUB.getMessage();
     }
 
     public String startLesson() {
@@ -47,11 +47,11 @@ public class Lesson {
                 for (Student s : this.studentsInLesson) {
                     s.attendLesson(this);
                 }
-                return "Lesson started";
+                return LessonStatusCode.START_LESSON.getMessage();
             }
-            return "Not enough students";
+            return LessonStatusCode.NOSTART_NO_ENOUGHSTUD.getMessage();
         }
-        return "Teacher not qualified to teach this lesson";
+        return LessonStatusCode.NOSTART_NO_TEACHER.getMessage();
     }
 
     public void endLesson() {

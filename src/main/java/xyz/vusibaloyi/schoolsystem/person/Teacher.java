@@ -3,8 +3,10 @@ package xyz.vusibaloyi.schoolsystem.person;
 import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
 import xyz.vusibaloyi.schoolsystem.Subject;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class Teacher extends Person {
 
     private final  ArrayList<Subject> teacherSubjects;
@@ -26,11 +28,11 @@ public class Teacher extends Person {
         return lesson.startLesson();
     }
 
-    public void updateTokenCount(double numberOfTokens){
-        if(this.tokenCount + numberOfTokens >= 0){
-            this.tokenCount   += numberOfTokens;
-        }
-    }
+//    public void updateTokenCount(double numberOfTokens){
+//        if(this.tokenCount + numberOfTokens >= 0){
+//            this.tokenCount   += numberOfTokens;
+//        }
+//    }
 
     //getters
     public String getFirstName() {

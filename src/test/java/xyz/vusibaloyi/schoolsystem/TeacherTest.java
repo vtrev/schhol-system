@@ -62,15 +62,15 @@ class TeacherTest {
         assertEquals(teacher.teachLesson(accountingLesson), "Cannot start lesson, no qualified teacher available");
     }
 
-    @Test
-    void updateTokenCount() {
-        ArrayList<Subject> subjectList = new ArrayList<Subject>();
-        subjectList.add(Subject.ECONOMICS);
-        Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
-        //token = 0 initially
-        teacher.updateTokenCount(15);
-        assertEquals(teacher.getTokenCount(), 15);
-        teacher.updateTokenCount(-5);
-        assertEquals(teacher.getTokenCount(), 10);
-    }
+//    @Test
+//    void updateTokenCount() {
+//        ArrayList<Subject> subjectList = new ArrayList<Subject>();
+//        subjectList.add(Subject.ECONOMICS);
+//        Teacher teacher = new Teacher("Vusi", "Baloyi", "vusi@baloyi.com", subjectList);
+//        //token = 0 initially
+//        teacher.updateTokenCount(15);
+//        assertEquals(teacher.getTokenCount(), 15);
+//        teacher.updateTokenCount(-5);
+//        assertEquals(teacher.getTokenCount(), 10);
+//    }
 }

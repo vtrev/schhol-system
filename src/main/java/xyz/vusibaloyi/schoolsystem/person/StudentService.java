@@ -1,22 +1,18 @@
 package xyz.vusibaloyi.schoolsystem.person;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import xyz.vusibaloyi.schoolsystem.HibernateSession;
+
 
 public class StudentService {
     
-    private Configuration config = new Configuration().configure("hibernate.cfg.xml");
-    private ServiceRegistry serviceReg = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
-    private SessionFactory sessionFactory = config.buildSessionFactory(serviceReg);
-    private Session session = sessionFactory.openSession();
-    private Transaction tx = session.beginTransaction();
+    private Session session = new HibernateSession().getSession();
+    private Transaction tx;
         
     public String saveStudent(Student student){
         try {
+            tx = session.beginTransaction();
             session.save(student);
             tx.commit();
             return "student saved";
@@ -29,4 +25,22 @@ public class StudentService {
             session.close();
         }
     }
+    
+    public Student getStudentById(int student_id){
+        Student tmpStudent = null;
+        try {
+            tx = session.beginTransaction();
+            tmpStudent = (Student) session.get(Student.class,student_id);
+            tx.commit();
+            
+        }catch (Exception e){
+            e.printStackTrace();
+            tx.rollback();
+        }
+        finally {
+            session.close();
+        }
+        return tmpStudent;
+    }
 }
+

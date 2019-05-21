@@ -3,20 +3,25 @@ package xyz.vusibaloyi.schoolsystem.person;
 import xyz.vusibaloyi.schoolsystem.lesson.Lesson;
 import xyz.vusibaloyi.schoolsystem.Subject;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
 public class Teacher extends Person {
-
-    private final  ArrayList<Subject> teacherSubjects;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "teacher_id",nullable = false,updatable = false)
+    private int teacher_id;
+    @Transient
+    private ArrayList<Subject> teacherSubjects;
+    @Transient
     private int lessonsTaughtCount = 0;
 
     public Teacher(String firstName, String lastName, String emailAddress,ArrayList<Subject> subjects) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.teacherSubjects = subjects;
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmailAddress(emailAddress);
+        setTeacherSubjects(subjects);
     }
 
     public String teachLesson(Lesson lesson){
@@ -27,26 +32,26 @@ public class Teacher extends Person {
         }
         return lesson.startLesson();
     }
-
-//    public void updateTokenCount(double numberOfTokens){
-//        if(this.tokenCount + numberOfTokens >= 0){
-//            this.tokenCount   += numberOfTokens;
-//        }
-//    }
-
+    
     //getters
-    public String getFirstName() {
-        return firstName;
+    @Access(AccessType.PROPERTY)
+    @Column(name="first_name")
+    public String getFirstName(){
+        return super.getFirstName();
     }
-
-    public String getLastName() {
-        return lastName;
+    
+    @Access(AccessType.PROPERTY)
+    @Column(name="last_name")
+    public String getLastName(){
+        return super.getLastName();
     }
-
-    public String getEmailAddress() {
-        return emailAddress;
+    
+    @Access(AccessType.PROPERTY)
+    @Column(name="email_address")
+    public String getEmailAddress(){
+        return super.getEmailAddress();
     }
-
+    
     public ArrayList<Subject> getTeacherSubjects() {
         return teacherSubjects;
     }
@@ -54,8 +59,24 @@ public class Teacher extends Person {
     public double getTokenCount(){
         return tokenCount;
     }
-
     public int getLessonsTaughtCount() {
         return lessonsTaughtCount;
+    }
+
+    //setters
+    
+    public void setFirstName(String name){
+        this.firstName = name;
+    }
+    public void setLastName(String name){
+        this.lastName = name;
+    }
+    
+    public void setEmailAddress(String emailAddress){
+        this.emailAddress = emailAddress;
+    }
+    
+    public void setTeacherSubjects(ArrayList<Subject> teacherSubjects) {
+        this.teacherSubjects = teacherSubjects;
     }
 }

@@ -11,13 +11,7 @@ public enum LessonStatusCode {
     NOSTART_NO_ENOUGHSTUD("Not enough students"),
     REJECT_TEACHER("Teacher not qualified to teach this lesson"),
     NOSTART_NO_TEACHER("Cannot start lesson, no qualified teacher available");
-    
-    
-    
-    
-    
-    
-    
+
     private String message;
     
     LessonStatusCode(String message) {

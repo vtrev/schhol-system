@@ -23,7 +23,7 @@ public class Student extends Person {
     private ArrayList<LessonNote> purchasedNotes;
     @Transient
     private boolean inLessonState = false;
-
+    public Student(){}
     public Student(String firstName, String lastName, String emailAddress){
         setFirstName(firstName);
         setLastName(lastName);

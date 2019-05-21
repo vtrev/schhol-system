@@ -26,5 +26,11 @@ public class Person {
     public double getTokenCount() {
         return tokenCount;
     }
-
+    
+    @Override
+    public String toString() {
+        return "\t\tStudent info\n"+"==================================\n"+"First Name\t: "+getFirstName()+"\n"+
+                "Last Name\t: "+getLastName()+"\n"+
+                "email\t\t: "+getEmailAddress()+"\n";
+    }
 }
